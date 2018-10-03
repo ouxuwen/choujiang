@@ -95,8 +95,6 @@
 			c = a[a.length - 1],
 			d = c.src,
 			e = d.substring(0, d.lastIndexOf("/") + 1);
-		c.getAttribute("merge") || document.head.appendChild(function() {
-			
-		}())
+		
 	}()
 }(window);
