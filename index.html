@@ -268,8 +268,8 @@
 			未登录
 			<p></p>
 		</div>
-		<div class="draw" id="lottery">
-			<table>
+		<div class="draw" id="lottery" v-show='isLogin'>
+			<table v-cloak>
 				<tr>
 					<td class="item lottery-unit lottery-unit-0">
 						<div class="img">
@@ -460,7 +460,7 @@
 				currentGift: {},
 				getList: [],
 				showCurrent: false,
-				isLogin: true,
+				isLogin: false,
 				hasGift: false,
 				inde: 0,
 				password: '',
