@@ -467,10 +467,24 @@
 				inde: 0,
 				password: '',
 				tel: '',
-				userInfo: ''
+				userInfo: '',
+				ma:''
 			},
 			created: function () {
+				var ma =  localStorage.getItem('ma');
 				let _this = this;
+				if(ma){
+					this.isLogin = true;
+					ma.split(',').forEach(el => {
+							let dj = _this.giftList[el];
+							
+							_this.getList.push({
+								"img": dj.img,
+								"name": dj.name
+							})
+					})
+				}
+				
 				if (sessionStorage.getItem('userInfo')) {
 					this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
 					this.isLogin = true;
@@ -492,7 +506,8 @@
 			methods: {
 				run: function () {
 					if (this.getList.length > 2) {
-						alert('所有的模样都是爱你的模样~');
+						localStorage.setItem('ma',this.ma)
+						alert('抽完啦，所有的模样都是爱你的模样~');
 						return false;
 					}
 					if (click) { //click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
@@ -519,6 +534,8 @@
 						this.getList.push(this.currentGift);
 						$(".active").removeClass('active');
 						let _this = this;
+						_this.ma+=','+(_this.inde-1);
+						localStorage.setItem('ma',this.ma)
 						$.ajax({
 							type: 'POST',
 							url: '/choujiang/send.php',
@@ -559,6 +576,7 @@
 					let _this = this;
 					if(this.tel==13632378647 && this.password == 921004){
 						this.isLogin = true;
+						localStorage.setItem('ma','');
 					}else{
 						alert("账号或密码错误,密码是你6位生日")
 					}
